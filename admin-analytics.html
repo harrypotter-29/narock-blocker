@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>통계 관리 · NAROCK BLOCKER Admin</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<main class="admin-page">
+ <div class="admin-layout">
+  <section class="admin-main">
+   <div class="admin-top">
+    <div>
+     <div class="eyebrow">STATISTICS MANAGEMENT</div>
+     <h1 style="font-size:40px;letter-spacing:-.05em;margin:7px 0">통계 관리</h1>
+     <p class="muted">Analyzer에서 실제 실행한 검사 기록과 표현 DB를 기준으로 운영 통계를 집계합니다.</p>
+    </div>
+    <button class="btn small" id="clearAnalytics">검사 기록 초기화</button>
+   </div>
+
+   <div class="metrics">
+    <div class="metric"><span>총 검사</span><strong id="aTotal">0</strong></div>
+    <div class="metric"><span>HIGH 이상 비율</span><strong id="aHigh">0%</strong></div>
+    <div class="metric"><span>평균 Finding</span><strong id="aAvg">0.0</strong></div>
+    <div class="metric"><span>추천 적용</span><strong id="aCorrections">0</strong></div>
+   </div>
+
+   <div class="admin-panels analytics-grid">
+    <div class="panel"><div class="panel-title-row"><h3>플랫폼별 검사</h3><span class="admin-badge">PLATFORM</span></div><div class="stat-bars" id="platformBars"></div></div>
+    <div class="panel"><div class="panel-title-row"><h3>국가별 검사</h3><span class="admin-badge">REGION</span></div><div class="stat-bars" id="regionBars"></div></div>
+   </div>
+   <div class="admin-panels analytics-grid">
+    <div class="panel"><div class="panel-title-row"><h3>Overall Risk 분포</h3><span class="admin-badge">RISK</span></div><div class="stat-bars" id="riskBars"></div></div>
+    <div class="panel"><div class="panel-title-row"><h3>사용 환경별 검사</h3><span class="admin-badge">USAGE</span></div><div class="stat-bars" id="usageBars"></div></div>
+   </div>
+   <div class="admin-panels analytics-grid">
+    <div class="panel"><div class="panel-title-row"><h3>많이 탐지된 표현</h3><span class="admin-badge">TERM</span></div><div class="stat-bars" id="termBars"></div></div>
+    <div class="panel"><div class="panel-title-row"><h3>Risk DB 카테고리 구성</h3><span class="admin-badge">DATABASE</span></div><div class="stat-bars" id="dbBars"></div></div>
+   </div>
+
+   <div class="panel" style="margin-top:14px">
+    <div class="panel-title-row"><h3>최근 검사 기록</h3><span class="muted" id="analyticsCountLabel" style="font-size:11px"></span></div>
+    <div class="analytics-table">
+     <div class="analytics-row head"><span>시간</span><span>플랫폼 / 국가</span><span>사용 환경</span><span>위험</span><span>Finding</span><span>콘텐츠</span></div>
+     <div id="analyticsRecent"></div>
+    </div>
+   </div>
+  </section>
+ </div>
+</main>
+<script src="assets/js/risk-data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/risk-engine.js"></script>
+<script src="assets/js/app-store.js"></script>
+<script src="assets/js/admin-common.js"></script>
+<script src="assets/js/admin-analytics.js"></script>
+</body>
+</html>

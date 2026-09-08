@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>표현 관리 · NAROCK BLOCKER Admin</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<main class="admin-page">
+ <div class="admin-layout">
+  <section class="admin-main">
+   <div class="admin-top">
+    <div>
+     <div class="eyebrow">EXPRESSION MANAGEMENT</div>
+     <h1 style="font-size:40px;letter-spacing:-.05em;margin:7px 0">표현 관리</h1>
+     <p class="muted">여기에서 승인·수정한 표현과 대체 표현은 Analyzer의 다음 검사부터 즉시 반영됩니다.</p>
+    </div>
+    <button class="btn purple small" id="addExpressionBtn">+ 새 표현 추가</button>
+   </div>
+
+   <div class="admin-link-notice">
+    <span class="admin-link-dot"></span>
+    <div><b>Analyzer 연결됨</b><span>RiskStore의 승인된 표현을 Analyzer가 검사할 때마다 다시 읽습니다.</span></div>
+    <a class="btn small" href="analyzer.html">Analyzer 열기 →</a>
+   </div>
+
+   <div class="metrics expression-metrics">
+    <div class="metric"><span>전체 표현</span><strong id="eTotal">0</strong></div>
+    <div class="metric"><span>Analyzer 사용 중</span><strong id="eApproved">0</strong></div>
+    <div class="metric"><span>검토 대기</span><strong id="ePending">0</strong></div>
+    <div class="metric"><span>대체 표현 등록률</span><strong id="eCoverage">0%</strong></div>
+   </div>
+
+   <div class="expression-toolbar">
+    <div class="expression-tabs" id="expressionTabs">
+     <button class="chip active" data-expression-status="">전체</button>
+     <button class="chip" data-expression-status="approved">사용 중</button>
+     <button class="chip" data-expression-status="pending">검토 대기</button>
+     <button class="chip" data-expression-status="ambiguous">애매함</button>
+     <button class="chip" data-expression-status="rejected">제외</button>
+    </div>
+    <div class="expression-search-row">
+     <input id="expressionSearch" placeholder="표현, 별칭, 설명 검색">
+     <select id="expressionCategory"><option value="">모든 카테고리</option></select>
+    </div>
+   </div>
+
+   <div class="table expression-table">
+    <div class="expression-row head">
+     <span>표현</span><span>카테고리</span><span>위험도</span><span>대체 표현</span><span>상태</span><span>관리</span>
+    </div>
+    <div id="expressionRows"></div>
+   </div>
+
+   <div class="modal-back" id="expressionModal">
+    <form class="modal expression-modal" id="expressionForm">
+     <div class="modal-header-row">
+      <div><div class="eyebrow">RISK DATABASE</div><h2 id="expressionModalTitle">새 표현 추가</h2></div>
+      <button class="btn small" type="button" id="closeExpressionModal">닫기 ×</button>
+     </div>
+     <div class="form-grid">
+      <div><label>대표 표현</label><input name="term" required placeholder="예: 새로운 은어"></div>
+      <div><label>변형 표현 · 별칭</label><input name="variants" placeholder="쉼표로 구분"></div>
+      <div><label>카테고리</label><select name="category" id="expressionCategoryField"></select></div>
+      <div><label>위험도</label><select name="severity"><option value="1">1 · SAFE</option><option value="2">2 · LOW</option><option value="3" selected>3 · CAUTION</option><option value="4">4 · HIGH</option><option value="5">5 · CRITICAL</option></select></div>
+      <div><label>상태</label><select name="status"><option value="approved">approved · Analyzer 사용</option><option value="pending" selected>pending · 검토 대기</option><option value="ambiguous">ambiguous · 애매함</option><option value="rejected">rejected · 제외</option></select></div>
+      <div><label>출처 / 유래</label><input name="origin" placeholder="예: 온라인 커뮤니티"></div>
+      <div class="full"><label>설명</label><textarea name="description" placeholder="왜 검토가 필요한 표현인지 작성"></textarea></div>
+      <div><label>안전 문맥</label><textarea name="safeContexts" placeholder="설명, 인용, 연구 ..."></textarea></div>
+      <div><label>위험 문맥</label><textarea name="riskyContexts" placeholder="비하, 조롱 ..."></textarea></div>
+      <div class="full"><label>한국어 추천 표현</label><input name="altKR" placeholder="학생, 청소년, 학생 이용자"></div>
+      <div><label>영어 추천 표현</label><input name="altUS" placeholder="students, younger users"></div>
+      <div><label>일본어 추천 표현</label><input name="altJP" placeholder="学生, 若い利用者"></div>
+     </div>
+     <div class="expression-modal-actions">
+      <button class="btn" type="button" id="deleteExpressionBtn" style="display:none">삭제</button>
+      <div style="flex:1"></div>
+      <button class="btn" type="button" id="savePendingBtn">검토 대기로 저장</button>
+      <button class="btn purple" type="submit">저장 및 반영</button>
+     </div>
+    </form>
+   </div>
+  </section>
+ </div>
+</main>
+<script src="assets/js/risk-data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/risk-engine.js"></script>
+<script src="assets/js/app-store.js"></script>
+<script src="assets/js/admin-common.js"></script>
+<script src="assets/js/admin-expressions.js"></script>
+</body>
+</html>

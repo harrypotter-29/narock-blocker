@@ -1,0 +1,31 @@
+V3.6 → V3.6.1 주요 변경 파일
+
+[NEW]
+admin-expressions.html
+assets/js/admin-expressions.js
+assets/js/admin-inquiry-center.js
+start_preview.bat
+CHANGED_FILES.txt
+
+[UPDATED]
+analyzer.html
+admin.html
+admin-inquiries.html
+admin-analytics.html
+README.md
+assets/css/style.css
+assets/js/analyzer.js
+assets/js/admin-common.js
+assets/js/admin-dashboard.js
+assets/js/admin-analytics.js
+
+[UNCHANGED / PRESERVED]
+index.html 및 기존 V3.6 공개 페이지 디자인
+risk-engine.js
+Risk DB seed JSON / logo / 기존 페이지 대부분
+
+V3.6.2
+- assets/js/common.js
+- assets/js/admin-common.js
+- assets/css/style.css
+- README.md

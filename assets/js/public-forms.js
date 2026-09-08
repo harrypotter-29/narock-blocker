@@ -1,0 +1,5 @@
+(function(){
+ window.publicToast=function(msg){let t=document.getElementById('publicToast');if(!t){t=document.createElement('div');t.id='publicToast';t.className='toast';document.body.appendChild(t)}t.textContent=msg;t.classList.add('show');clearTimeout(window.__pt);window.__pt=setTimeout(()=>t.classList.remove('show'),2000)};
+ const ef=document.getElementById('enterpriseForm');if(ef){ef.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(ef);AppStore.add('enterpriseRequests',{company:f.get('company'),name:f.get('name'),email:f.get('email'),teamSize:f.get('teamSize'),need:f.get('need'),message:f.get('message'),status:'new'});ef.reset();publicToast('기업 도입 요청을 접수했습니다. 관리자 페이지에 반영됩니다.')})}
+ const ff=document.getElementById('feedbackForm');if(ff){ff.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(ff);AppStore.add('feedback',{kind:f.get('kind'),term:f.get('term'),message:f.get('message'),status:'new'});ff.reset();publicToast('제보를 접수했습니다. 관리자 검토 Queue에 반영됩니다.')})}
+})();

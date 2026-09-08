@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Analyzer · NAROCK BLOCKER</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<main class="page" style="background:#fbfbfd">
+ <div class="analyzer-shell">
+  <div class="analyzer-head">
+   <div><div class="eyebrow">PRODUCT WORKSPACE</div><h1 style="font-size:42px;letter-spacing:-.05em;margin:6px 0">Content Analyzer</h1><p class="muted" style="margin:0">Risk DB 검사부터 표현 추천·수정까지 한 화면에서 진행합니다.</p></div>
+   <div style="display:flex;gap:8px"><span class="analyzer-db-state">● Admin Risk DB Connected</span><a class="btn small" href="admin-expressions.html">표현 관리</a></div>
+  </div>
+  <div class="mode-tabs"><a class="tab" data-mode="text" href="analyzer.html?mode=text">TEXT · LIVE</a><a class="tab" data-mode="image" href="analyzer.html?mode=image">IMAGE · BETA</a><a class="tab" data-mode="video" href="analyzer.html?mode=video">VIDEO · SOON</a></div>
+
+  <div id="textWorkspace">
+   <div class="context-row">
+    <div class="field"><label>Platform</label><select id="platform"><option value="general">General</option><option value="instagram">Instagram</option><option value="youtube">YouTube</option><option value="tiktok">TikTok</option><option value="x">X</option></select></div>
+    <div class="field"><label>Region</label><select id="region"><option value="KR">Korea</option><option value="US">United States</option><option value="JP">Japan</option></select></div>
+    <div class="field"><label>Usage</label><select id="usage"><option value="general">General</option><option value="personal_social">개인 SNS</option><option value="school">학교</option><option value="corporate">기업</option><option value="media">언론·방송</option><option value="public_institution">공공기관</option></select></div>
+   </div>
+
+   <div class="scanner">
+    <section class="scan-pane">
+     <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:800;color:#7d8590"><span>CONTENT INPUT</span><span id="charCount">0 / 2,000</span></div>
+     <textarea id="contentInput" class="editor" maxlength="2000" placeholder="게시하려는 내용을 입력하세요."></textarea>
+     <div class="chips" style="margin-top:10px"><button class="chip" data-sample="요즘 급식충 때문에 너무 짜증난다.">SNS 예시</button><button class="chip" data-sample="‘틀딱’이라는 표현의 의미와 온라인 사용 맥락을 설명하는 영상입니다.">설명 문맥</button><button class="chip" data-sample="문의는 test@example.com 또는 010-1234-5678로 연락해 주세요.">개인정보</button></div>
+     <div id="editState" class="edit-state" style="display:none"><b>수정안이 입력창에 적용되었습니다.</b><span>수정된 문장을 다시 검사하면 변경된 위험도를 확인할 수 있습니다.</span></div>
+     <button class="btn purple" id="analyzeBtn" style="width:100%;margin-top:12px">DB 기반 검사 시작 →</button>
+     <div class="analyzing-beam" id="activeBeam"></div>
+    </section>
+
+    <section class="scan-pane">
+     <div class="empty-result" id="emptyResult"><div><div class="eyebrow">READY</div><h3>콘텐츠를 입력하고<br>검사를 시작하세요.</h3><p>10개 위험 영역 × 5단계와 문맥별 추천 표현을 표시합니다.</p></div></div>
+     <div class="analysis-steps" id="analysisSteps"><div class="steps-box"><div class="eyebrow">ANALYZING</div><div class="runtime-step"><span>01 텍스트 정규화</span><span>WAIT</span></div><div class="runtime-step"><span>02 위험 표현 DB 탐색</span><span>WAIT</span></div><div class="runtime-step"><span>03 문맥 · 환경 보정</span><span>WAIT</span></div><div class="runtime-step"><span>04 플랫폼 · 국가 추천</span><span>WAIT</span></div><div class="runtime-step"><span>05 위험도 집계</span><span>WAIT</span></div></div></div>
+
+     <div class="result" id="result">
+      <div class="summary"><div><div class="eyebrow">OVERALL</div><h3 id="resultTitle" style="margin:5px 0"></h3><div class="muted" id="resultMeta" style="font-size:11px"></div></div><span class="badge r1" id="overallBadge">SAFE</span></div>
+      <div class="category-list" id="categories"></div>
+      <h3>원문 Highlight</h3><div class="highlighted" id="highlighted"></div>
+      <h3>Detected Findings</h3><div id="findings"></div>
+
+      <section class="rewrite-panel" id="rewritePanel">
+       <div class="rewrite-head"><div><div class="eyebrow">EXPRESSION RECOMMENDATION</div><h3>표현 추천 및 수정</h3><p id="recommendationContext">현재 게시 환경에 맞는 대체 표현을 추천합니다.</p></div><span class="admin-badge done">DB BASED</span></div>
+       <div class="rewrite-mode-tabs" id="rewriteModes">
+        <button class="chip active" data-rewrite-mode="minimal">최소 수정</button>
+        <button class="chip" data-rewrite-mode="natural">자연스럽게</button>
+        <button class="chip" data-rewrite-mode="formal">공식 문체</button>
+       </div>
+       <div class="rewrite-compare">
+        <div><small>BEFORE</small><div class="rewrite-copy" id="rewriteBefore"></div></div>
+        <div class="rewrite-arrow">→</div>
+        <div><small>RECOMMENDED</small><div class="rewrite-copy recommended" id="rewriteAfter"></div></div>
+       </div>
+       <div class="rewrite-actions"><button class="btn purple small" id="applyAllRecommendations">전체 추천 적용</button><button class="btn small" id="recheckRecommendation">수정안 재검사</button><button class="btn small" id="restoreOriginal">원문 복원</button></div>
+       <div class="rewrite-note" id="rewriteNote"></div>
+      </section>
+     </div>
+    </section>
+   </div>
+  </div>
+
+  <div id="mediaWorkspace" style="display:none;min-height:520px;place-items:center;border:1.5px dashed #d8dbe3;border-radius:22px;background:white;margin-top:15px;text-align:center"><div><div class="eyebrow">EXPANSION</div><h2 id="mediaTitle">Image Analyzer · BETA</h2><p class="muted">실제 API 연결 전 구조 Preview입니다.</p></div></div>
+ </div>
+</main>
+<footer class="footer"><div class="wrap"><span>NAROCK BLOCKER · Static Prototype V3.6.1</span><span>GitHub Pages Ready · Paperlogy</span></div></footer>
+<script src="assets/js/common.js"></script><script src="assets/js/risk-data.js"></script><script src="assets/js/store.js"></script><script src="assets/js/risk-engine.js"></script><script src="assets/js/analyzer.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>문의 관리 · NAROCK BLOCKER Admin</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<main class="admin-page">
+ <div class="admin-layout">
+  <section class="admin-main">
+   <div class="admin-top">
+    <div>
+     <div class="eyebrow">INQUIRY MANAGEMENT</div>
+     <h1 style="font-size:40px;letter-spacing:-.05em;margin:7px 0">문의 관리</h1>
+     <p class="muted">기업 도입 문의와 표현 신고·판단 이의 제보를 한 곳에서 확인하고 처리합니다.</p>
+    </div>
+    <select id="inquiryStatusFilter" class="admin-select">
+     <option value="">전체 상태</option>
+     <option value="new">신규</option>
+     <option value="reviewing">검토 중</option>
+     <option value="consulting">상담 중</option>
+     <option value="in_progress">처리 중</option>
+     <option value="done">완료</option>
+    </select>
+   </div>
+
+   <div class="metrics inquiry-metrics">
+    <div class="metric"><span>기업 문의</span><strong id="iEnterprise">0</strong></div>
+    <div class="metric"><span>표현 신고</span><strong id="iFeedback">0</strong></div>
+    <div class="metric"><span>일반 문의</span><strong id="iSupport">0</strong></div>
+    <div class="metric"><span>미처리 전체</span><strong id="iOpen">0</strong></div>
+   </div>
+
+   <div class="inquiry-tabs" id="inquiryTabs">
+    <button class="chip active" data-inquiry-type="enterpriseRequests">기업 문의 <em id="tabEnterpriseCount">0</em></button>
+    <button class="chip" data-inquiry-type="feedback">표현 신고 <em id="tabFeedbackCount">0</em></button>
+    <button class="chip" data-inquiry-type="inquiries">일반 문의 <em id="tabSupportCount">0</em></button>
+   </div>
+
+   <div class="inbox inquiry-center">
+    <div class="inbox-list" id="inquiryList"></div>
+    <div class="detail-card" id="inquiryDetail"><div class="empty-box">왼쪽에서 문의를 선택하세요.</div></div>
+   </div>
+  </section>
+ </div>
+</main>
+<script src="assets/js/risk-data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/risk-engine.js"></script>
+<script src="assets/js/app-store.js"></script>
+<script src="assets/js/admin-common.js"></script>
+<script src="assets/js/admin-inquiry-center.js"></script>
+</body>
+</html>
